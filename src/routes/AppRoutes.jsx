@@ -10,6 +10,8 @@ import Allpatients from "../pages/Patients/Allpatients/Allpatients";
 import AddPatients from "../pages/Patients/Addpatients/AddPatients";
 import Profile from "../pages/Patients/Profile/Profile";
 import InviteDoctor from "../pages/Doctor/InviteDoctor/InviteDoctor";
+import AddStaff from "../pages/Staffs/AddStaff/AddStaff";
+import AllStaffs from "../pages/Staffs/AllStaffs/Allstaffs";
 
 const AppRoutes = () => {
   return (
@@ -19,12 +21,14 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/appointment" index element={<Appointment />} />
         <Route path="/doctor" index element={<DoctorsList />} />
-        <Route path="/doctors/add-doctor" index element={<AddDoctor />} />
+        <Route path="/doctors/add-doctor/:id" index element={<AddDoctor />} />
         <Route path="/doctors/profile" index element={<DoctorProfile />} />
         <Route path="/allpatients" index element={<Allpatients />} />
         <Route path="/addpatients" index element={<AddPatients />} />
         <Route path="/patientprofile" index element={<Profile />} />
         <Route path="/doctors/invite-doctor" index element={<InviteDoctor />} />
+        <Route path="/staffs/add-staff" index element={<AddStaff />} />
+        <Route path="/allstaffs" index element={<AllStaffs />} />
       </Routes>
     </BrowserRouter>
   );

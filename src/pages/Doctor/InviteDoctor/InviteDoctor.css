@@ -1,7 +1,13 @@
 .button-text {
     font-family: "Inter", sans-serif;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 22.5px;
   }
+  #header{
+    /* background-color: rgb(244, 245, 247); */
+  color: rgb(15, 14, 14);
+  border-radius: 15px;
+  }
+  
   

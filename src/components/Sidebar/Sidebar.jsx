@@ -1,15 +1,16 @@
 import "./Sidebar.css";
-import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Home from "../../assets/icons/home-outline.svg";
 import Contacts from "../../assets/icons/contacts.svg";
-import Companies from "../../assets/icons/companies.svg";
 import Properties from "../../assets/icons/properties.svg";
 import Buyers from "../../assets/icons/buyers.svg";
 import Sidearrow from "../../assets/svgs/rightarrow.svg";
 import doctorlogo from "../../assets/images/doctorlogo.png";
 import LeftArrow from "../../assets/svgs/left-arrow.svg";
 import RightArrow from "../../assets/svgs/right-arrow.svg";
+import { useSelector } from "react-redux";
+import { setDate } from "../../redux/Reducer/AuthReducer";
 
 const sidebarOptions = [
   { name: "Dashboard", icon: Home, link: "/dashboard" },
@@ -22,7 +23,7 @@ const sidebarOptions = [
     submenu: [
       { name: "Doctor List", link: "/doctor" },
       { name: "Invite Doctor", link: "/doctors/invite-doctor" },
-      { name: "Doctor Profile", link: "/doctors/profile" },
+      // { name: "Doctor Profile", link: "/doctors/profile" },
     ],
   },
   {
@@ -36,14 +37,25 @@ const sidebarOptions = [
       { name: "Profile", link: "/patientprofile" },
     ],
   },
-  // { name: "Patients", icon: Buyers, link: "/patients" },
-  { name: "Layouts", icon: Companies, link: "#", specialClass: true },
+  {
+    name: "Staff",
+    icon: Contacts,
+    link: "#", // No link for parent option since it's a toggle
+    hasSubmenu: true,
+    submenu: [
+      { name: "All Staffs", link: "/allstaffs" },
+      { name: "Add Staff", link: "/staffs/add-staff" },
+    ],
+  },
 ];
 
 const SidebarComponent = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState(null);
   const location = useLocation();
+  const token = useSelector((state) => state.token);
+  const userType = useSelector((state) => state.setUserType);
+  console.log("..........", userType);
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
@@ -53,6 +65,26 @@ const SidebarComponent = () => {
     setExpandedMenu(expandedMenu === index ? null : index);
   };
 
+  useEffect(() => {
+    // Ensure the submenu stays open if the current path matches a submenu item
+    sidebarOptions.forEach((option, index) => {
+      if (option.hasSubmenu) {
+        const isSubmenuActive = option.submenu.some(
+          (subOption) => location.pathname === subOption.link
+        );
+        if (isSubmenuActive) {
+          setExpandedMenu(index);
+        }
+      }
+    });
+  }, [location.pathname]);
+
+  const filteredSidebarOptions =
+    userType === 1
+      ? sidebarOptions // Show all options for userType 1
+      : sidebarOptions.filter((option) =>
+          ["Dashboard", "Appointment", "Staff"].includes(option.name)
+        ); // Show limited options for userType 2
   return (
     <div className={`sidebar ${isSidebarCollapsed ? "collapsed" : ""}`}>
       <div
@@ -61,9 +93,9 @@ const SidebarComponent = () => {
         }`}
       >
         <div className="logo-section">
-          <NavLink to="/">
+          <Link to="/">
             <img src={doctorlogo} alt="Logo" className="sidebar-logo" />
-          </NavLink>
+          </Link>
           <button onClick={toggleSidebar} className="toggle-button">
             <img
               src={isSidebarCollapsed ? RightArrow : LeftArrow}
@@ -78,19 +110,19 @@ const SidebarComponent = () => {
         <div
           className={`middle_sidebar ${isSidebarCollapsed ? "collapsed" : ""}`}
         >
-          {sidebarOptions.map((option, index) => (
+          {filteredSidebarOptions.map((option, index) => (
             <li
               key={index}
               className={`option ${isSidebarCollapsed ? "collapsed" : ""} ${
                 option.specialClass ? "special-class" : ""
               } w-full cursor-pointer`}
             >
-              <div className="flex items-center justify-between ">
-                <NavLink to={option.link}>
+              <div className="flex items-center justify-between">
+                <Link to={option.link}>
                   <div
-                    className={` h-9 option-link flex items-center w-full body-N ${
+                    className={`h-9 option-link flex items-center w-full body-N ${
                       isSidebarCollapsed ? "collapsed" : ""
-                    } py-6  `}
+                    } py-6`}
                     onClick={() =>
                       option.hasSubmenu ? toggleSubmenu(index) : null
                     }
@@ -99,7 +131,7 @@ const SidebarComponent = () => {
                       <img
                         src={option.icon}
                         alt="icon"
-                        className="option-icon w-8 h-7 "
+                        className="option-icon w-8 h-7"
                       />
                       {!isSidebarCollapsed && (
                         <p className="ml-4 body-N text-left sidebar-text">
@@ -108,17 +140,17 @@ const SidebarComponent = () => {
                       )}
                     </div>
                     {/* Arrow icon aligned to the right - always visible */}
-                    <img
-                      src={Sidearrow}
-                      alt="arrow"
-                      className={`arrow-icon ml-auto ${
-                        option.hasSubmenu && expandedMenu === index
-                          ? "rotate-90"
-                          : ""
-                      }`}
-                    />
+                    {option.hasSubmenu && (
+                      <img
+                        src={Sidearrow}
+                        alt="arrow"
+                        className={`arrow-icon ml-auto ${
+                          expandedMenu === index ? "rotate-90" : ""
+                        }`}
+                      />
+                    )}
                   </div>
-                </NavLink>
+                </Link>
               </div>
 
               {/* Render submenu only if the parent is expanded */}
@@ -127,15 +159,13 @@ const SidebarComponent = () => {
                 option.hasSubmenu && (
                   <ul className="submenu pl-12">
                     {option.submenu.map((subOption, subIndex) => (
-                      <li key={subIndex} className="submenu-option mt-2 ">
-                        <NavLink
+                      <li key={subIndex} className="submenu-option mt-2">
+                        <Link
                           to={subOption.link}
-                          className="option-link body-N text-left "
-                          activeClassName="active"
-                          isActive={() => location.pathname === subOption.link}
+                          className="option-link body-N text-left"
                         >
                           {subOption.name}
-                        </NavLink>
+                        </Link>
                       </li>
                     ))}
                   </ul>

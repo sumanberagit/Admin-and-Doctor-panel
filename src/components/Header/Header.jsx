@@ -7,7 +7,6 @@ import Setting from "../../assets/svgs/Setting.svg";
 import Logout from "../../assets/svgs/Logout.svg";
 import Arrow from "../../assets/svgs/angle down.svg";
 
-
 const options = [
   { name: "My Profile", icon: Profile, link: "/profile" },
   { name: "Setting", icon: Setting, link: "/setting" },

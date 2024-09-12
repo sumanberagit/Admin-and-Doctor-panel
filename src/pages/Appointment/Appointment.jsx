@@ -13,8 +13,10 @@ const Appointment = () => {
       <div className="">
         <div className=" mx-5 flex justify-between">
           <h3 className=" py-2 font-bold text-gray-700 text-lg">Appointment</h3>
-          <button className="bg-blue-500 text-white font-bold  px-2 w-86 rounded hover:bg-blue-600" onClick={openModal}>
-
+          <button
+            className="bg-blue-500 text-white font-bold  px-2 w-86 rounded hover:bg-blue-600"
+            onClick={openModal}
+          >
             Appointment
           </button>
         </div>

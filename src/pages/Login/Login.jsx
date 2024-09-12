@@ -4,18 +4,31 @@ import doctorlogo from "../../assets/images/doctorlogo.png";
 import facebook from "../../assets/images/facebook.png";
 import google from "../../assets/images/google.png";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import {
+  setToken,
+  setUserType,
+  setDepartments,
+  // setUserId,
+  // setUserName,
+  // setExpertise,
+  // setContact,
+  // setDescription,
+  // setAmount,
+} from "../../redux/Reducer/AuthReducer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8080/adminsignin", {
+      const response = await axios.post("http://localhost:8080/signin", {
         email,
         password,
       });
@@ -23,6 +36,11 @@ const Login = () => {
       if (response.status === 200) {
         const { token } = response.data;
         localStorage.setItem("token", token);
+        dispatch(setToken(token));
+        dispatch(setUserType(response.data.userType));
+
+        console.log("userType", response.data.userType);
+        console.log("?????????????", response.data.Departments);
 
         setErrorMessage("");
         navigate("/dashboard");
