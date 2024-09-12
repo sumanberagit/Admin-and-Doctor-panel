@@ -66,6 +66,9 @@ const PatientsTable = () => {
               Gender
             </th>
             <th className="px-6 py-3 border-b text-left text-sm font-bold text-gray-900">
+              Blood Group
+            </th>
+            <th className="px-6 py-3 border-b text-left text-sm font-bold text-gray-900">
               Address
             </th>
             <th className="px-6 py-3 border-b text-left text-sm font-bold text-gray-900">
@@ -92,6 +95,9 @@ const PatientsTable = () => {
               </td>
               <td className="py-4 border-b text-sm text-gray-700 text-center">
                 {patient.gender}
+              </td>
+              <td className="py-4 border-b text-sm text-gray-700 text-center">
+                {patient.blood_group}
               </td>
               <td className="py-4 border-b text-sm text-gray-700 text-center">
                 {patient.location}

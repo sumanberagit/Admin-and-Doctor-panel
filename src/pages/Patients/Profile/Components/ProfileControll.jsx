@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import file from '../../../../assets/svgs/file.svg'
-import cardiogram from '../../../../assets/svgs/cardio.svg'
-import checkup from '../../../../assets/svgs/checkup.svg'
-import covid from '../../../../assets/svgs/Covid.svg'
-import dentist from '../../../../assets/svgs/dentist.svg'
-import eye from '../../../../assets/svgs/Eye.svg'
-import orthopedic from '../../../../assets/svgs/Orthopedic.svg'
-import InvoiceModal from './Modal/InvoiceModal';
-
+import React, { useState } from "react";
+import file from "../../../../assets/svgs/file.svg";
+import cardiogram from "../../../../assets/svgs/cardio.svg";
+import checkup from "../../../../assets/svgs/checkup.svg";
+import covid from "../../../../assets/svgs/Covid.svg";
+import dentist from "../../../../assets/svgs/dentist.svg";
+import eye from "../../../../assets/svgs/Eye.svg";
+import orthopedic from "../../../../assets/svgs/Orthopedic.svg";
+import InvoiceModal from "./Modal/InvoiceModal";
 
 const imageMap = {
   Cardiogram: cardiogram,
@@ -20,15 +19,17 @@ const imageMap = {
 const ProfileControll = ({ showinvoice }) => {
   const [activeTab, setActiveTab] = useState("profile");
 
-
   return (
     <>
       <div className="bg-white rounded-lg shadow-lg p-6 mb-20">
         {/* Tab Navigation */}
         <div className="flex border-b border-gray-200">
           <span
-            className={`w-full py-4 text-center ${activeTab === "profile" ? "text-white bg-blue-600" : "text-gray-600"
-              }`}
+            className={`w-full py-4 text-center ${
+              activeTab === "profile"
+                ? "text-white bg-blue-600"
+                : "text-gray-600"
+            }`}
             onClick={() => setActiveTab("profile")}
           >
             Profile
@@ -48,7 +49,11 @@ const ProfileControll = ({ showinvoice }) => {
             <div>
               <h3 className="text-lg font-semibold">Introduction:</h3>
               <p className="text-sm text-gray-600 mt-2">
-                Web designers to occupy the space which will later be filled with 'real' content. This is required when, for example, the final text is not yet available. Dummy text is also known as 'fill text'. Dummy texts have been in use by typesetters since the 16th century.
+                Web designers to occupy the space which will later be filled
+                with 'real' content. This is required when, for example, the
+                final text is not yet available. Dummy text is also known as
+                'fill text'. Dummy texts have been in use by typesetters since
+                the 16th century.
               </p>
 
               {/* Appointment and Payment Lists */}
@@ -58,12 +63,36 @@ const ProfileControll = ({ showinvoice }) => {
                   <h4 className="text-md font-semibold">Appointment List</h4>
                   <ul className="mt-4 space-y-4">
                     {[
-                      { name: "Cardiogram", doctor: "Dr. Calvin Carlo", date: "10 Dec" },
-                      { name: "Checkup", doctor: "Dr. Cristino Murphy", date: "12 Dec" },
-                      { name: "Covid Test", doctor: "Dr. Alia Reddy", date: "13 Dec" },
-                      { name: "Dentist", doctor: "Dr. Toni Kovar", date: "15 Dec" },
-                      { name: "Eye Test", doctor: "Dr. Jessica McFarlane", date: "17 Dec" },
-                      { name: "Orthopedic", doctor: "Dr. Elsie Sherman", date: "18 Dec" },
+                      {
+                        name: "Cardiogram",
+                        doctor: "Dr. Calvin Carlo",
+                        date: "10 Dec",
+                      },
+                      {
+                        name: "Checkup",
+                        doctor: "Dr. Cristino Murphy",
+                        date: "12 Dec",
+                      },
+                      {
+                        name: "Covid Test",
+                        doctor: "Dr. Alia Reddy",
+                        date: "13 Dec",
+                      },
+                      {
+                        name: "Dentist",
+                        doctor: "Dr. Toni Kovar",
+                        date: "15 Dec",
+                      },
+                      {
+                        name: "Eye Test",
+                        doctor: "Dr. Jessica McFarlane",
+                        date: "17 Dec",
+                      },
+                      {
+                        name: "Orthopedic",
+                        doctor: "Dr. Elsie Sherman",
+                        date: "18 Dec",
+                      },
                     ].map((item, index) => (
                       <li
                         key={index}
@@ -104,8 +133,8 @@ const ProfileControll = ({ showinvoice }) => {
                           <p className="font-medium">{item.name}</p>
                           <p className="text-sm text-gray-600">{item.status}</p>
                         </div>
-                        <div className='' onClick={showinvoice}>
-                          <img src={file} alt='file' />
+                        <div className="" onClick={showinvoice}>
+                          <img src={file} alt="file" />
                         </div>
                       </li>
                     ))}
@@ -137,11 +166,8 @@ const ProfileControll = ({ showinvoice }) => {
               </div>
             </div>
           )}
-
         </div>
-
       </div>
-
     </>
   );
 };
