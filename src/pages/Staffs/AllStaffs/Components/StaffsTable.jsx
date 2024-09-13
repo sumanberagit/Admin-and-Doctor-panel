@@ -32,7 +32,7 @@ const StaffsTable = () => {
     const fetchStaffs = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/staff/all-staff"
+          "https://consultant-backend-jiwv.onrender.com/staff/all-staff"
         );
         if (response.data.success && Array.isArray(response.data.staff)) {
           setStaffs(response.data.staff);

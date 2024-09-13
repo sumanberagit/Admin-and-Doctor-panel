@@ -19,13 +19,13 @@ const Appointment = () => {
         if (userType === 1) {
           // Fetch doctors data
           const response = await axios.get(
-            "http://localhost:8080/public/doctor"
+            "https://consultant-backend-jiwv.onrender.com/public/doctor"
           );
           setDoctors(response.data.doctors); // Assuming the response contains a 'doctors' array
         } else if (userType === 2) {
           // Fetch appointments data
           const response = await axios.get(
-            "http://localhost:8080/public/appointments"
+            "https://consultant-backend-jiwv.onrender.com/public/appointments"
           );
           setAppointments(response.data.appointments); // Assuming the response contains an 'appointments' array
         }

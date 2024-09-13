@@ -18,8 +18,9 @@ const AddStaff = () => {
     image: null,
   });
 
-  // State to hold response or error messages
+  // State to hold response or error messages and their types
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(""); // 'success' or 'error'
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -27,6 +28,14 @@ const AddStaff = () => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  // Handle phone number changes
+  const handlePhoneChange = (value) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      contact: value,
     }));
   };
 
@@ -58,7 +67,7 @@ const AddStaff = () => {
     try {
       // Send POST request to API
       const response = await axios.post(
-        "http://localhost:8080/staff/add",
+        "https://consultant-backend-jiwv.onrender.com/staff/add",
         data,
         {
           headers: {
@@ -69,13 +78,26 @@ const AddStaff = () => {
 
       // Handle success
       setMessage("Staff added successfully.");
-      console.log(response.data); // Optional: log response data
+      setMessageType("success");
+
+      // Clear form fields
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        contact: "",
+        Departments: "",
+        Gender: "",
+        bio: "",
+        image: null,
+      });
     } catch (error) {
       // Handle errors
       setMessage(
         error.response?.data?.message ||
           "Something went wrong. Please try again."
       );
+      setMessageType("error");
     }
   };
 
@@ -165,7 +187,7 @@ const AddStaff = () => {
                 <PhoneInput
                   name="contact"
                   value={formData.contact}
-                  onChange={(contact) => setFormData(contact)}
+                  onChange={handlePhoneChange}
                   placeholder="Phone no."
                   className="w-full mt-2 p-2 border rounded"
                   required
@@ -224,7 +246,15 @@ const AddStaff = () => {
             >
               Add Staff
             </button>
-            {message && <p className="mt-4 text-red-500">{message}</p>}
+            {message && (
+              <p
+                className={`mt-4 ${
+                  messageType === "success" ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                {message}
+              </p>
+            )}
           </form>
         </div>
       </div>

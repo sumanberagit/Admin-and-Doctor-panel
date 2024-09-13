@@ -30,7 +30,7 @@ const sidebarOptions = [
     hasSubmenu: true,
     submenu: [
       { name: "All Patients", link: "/allpatients" },
-      { name: "Add Patients", link: "/addpatients" },
+      // { name: "Add Patients", link: "/addpatients" },
       { name: "Profile", link: "/patientprofile" },
     ],
   },

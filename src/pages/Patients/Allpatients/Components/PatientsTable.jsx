@@ -19,7 +19,7 @@ const PatientsTable = () => {
     const fetchPatients = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/public/patient"
+          "https://consultant-backend-jiwv.onrender.com/public/patient"
         );
         setPatients(response.data.patients); // Assuming the API returns { patients: [] }
       } catch (error) {

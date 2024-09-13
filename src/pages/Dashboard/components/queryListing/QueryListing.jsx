@@ -10,7 +10,9 @@ const QueryListing = () => {
   useEffect(() => {
     const fetchPatientQueries = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/userquery");
+        const response = await axios.get(
+          "https://consultant-backend-jiwv.onrender.com/userquery"
+        );
         // Assuming the API returns an array of patient queries
         setPatients(response.data);
       } catch (error) {

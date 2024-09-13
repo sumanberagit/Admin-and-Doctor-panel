@@ -59,7 +59,7 @@ const AddDoctor = () => {
     setLoading(true); // Start loading and disable the button
     try {
       const response = await axios.post(
-        `http://localhost:8080/doctor/doctor-register/${id}`,
+        `https://consultant-backend-jiwv.onrender.com/doctor/doctor-register/${id}`,
         { ...formData, experience: experienceFields } // Send formData with experience fields
       );
       setMessage("Doctor added successfully!"); // Set success message

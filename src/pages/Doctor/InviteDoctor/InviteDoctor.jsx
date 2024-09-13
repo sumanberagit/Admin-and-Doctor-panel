@@ -27,12 +27,15 @@ const InviteDoctor = () => {
 
     try {
       // Make API request to send the invitation
-      const response = await axios.post("http://localhost:8080/invite-doctor", {
-        firstName,
-        lastName,
-        email,
-        contact,
-      });
+      const response = await axios.post(
+        "https://consultant-backend-jiwv.onrender.com/invite-doctor",
+        {
+          firstName,
+          lastName,
+          email,
+          contact,
+        }
+      );
 
       if (response.data) {
         setSuccess("Doctor invitation sent successfully!");
