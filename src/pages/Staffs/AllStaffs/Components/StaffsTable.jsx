@@ -6,6 +6,7 @@ import StaffsEditModal from "./Modal/StaffsEditModal";
 import StaffsViewModal from "./Modal/StaffsViewModal";
 import DeleteModal from "../../../../components/ConformtaionModal/DeleteModal";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const StaffsTable = () => {
   const [staffs, setStaffs] = useState([]);
@@ -13,6 +14,7 @@ const StaffsTable = () => {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showModal3, setShowModal3] = useState(false);
+  const userType = useSelector((state) => state.setUserType);
 
   // Open and close modals
   const openModal = (staff) => {
@@ -114,18 +116,22 @@ const StaffsTable = () => {
                     className="cursor-pointer"
                     onClick={() => openModal(staff)} // Pass staff data to modal
                   />
-                  <img
-                    src={Action4}
-                    alt="Edit"
-                    className="cursor-pointer"
-                    onClick={openModal2}
-                  />
-                  <img
-                    src={Action5}
-                    alt="Delete"
-                    className="cursor-pointer"
-                    onClick={openModal3}
-                  />
+                  {userType === 1 && (
+                    <>
+                      <img
+                        src={Action4}
+                        alt="Edit"
+                        className="cursor-pointer"
+                        onClick={openModal2}
+                      />
+                      <img
+                        src={Action5}
+                        alt="Delete"
+                        className="cursor-pointer"
+                        onClick={openModal3}
+                      />
+                    </>
+                  )}
                 </div>
               </td>
             </tr>
@@ -133,13 +139,18 @@ const StaffsTable = () => {
         </tbody>
       </table>
 
+      {/* Conditionally render modals based on userType */}
+      {userType === 1 && (
+        <>
+          <StaffsEditModal show={showModal2} onClose={closeModal2} />
+          <DeleteModal show={showModal3} onClose={closeModal3} />
+        </>
+      )}
       <StaffsViewModal
         show={showModal}
         onClose={closeModal}
         staff={selectedStaff}
       />
-      <StaffsEditModal show={showModal2} onClose={closeModal2} />
-      <DeleteModal show={showModal3} onClose={closeModal3} />
     </div>
   );
 };

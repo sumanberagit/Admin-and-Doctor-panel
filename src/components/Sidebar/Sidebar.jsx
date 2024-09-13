@@ -15,41 +15,10 @@ import { setDate } from "../../redux/Reducer/AuthReducer";
 const sidebarOptions = [
   { name: "Dashboard", icon: Home, link: "/dashboard" },
   { name: "Appointment", icon: Properties, link: "/appointment" },
-  {
-    name: "Doctors",
-    icon: Contacts,
-    link: "#", // No link for parent option since it's a toggle
-    hasSubmenu: true,
-    submenu: [
-      { name: "Doctor List", link: "/doctor" },
-      { name: "Invite Doctor", link: "/doctors/invite-doctor" },
-      // { name: "Doctor Profile", link: "/doctors/profile" },
-    ],
-  },
-  {
-    name: "Patients",
-    icon: Buyers,
-    link: "#", // No link for parent option since it's a toggle
-    hasSubmenu: true,
-    submenu: [
-      { name: "All Patients", link: "/allpatients" },
-      { name: "Add Patients", link: "/addpatients" },
-      { name: "Profile", link: "/patientprofile" },
-    ],
-  },
-  {
-    name: "Staff",
-    icon: Contacts,
-    link: "#", // No link for parent option since it's a toggle
-    hasSubmenu: true,
-    submenu: [
-      { name: "All Staffs", link: "/allstaffs" },
-      { name: "Add Staff", link: "/staffs/add-staff" },
-    ],
-  },
+  { name: "All Staffs", icon: Properties, link: "/allstaffs" },
 ];
 
-const SidebarComponent = () => {
+const SidebarComponent2 = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState(null);
   const location = useLocation();
@@ -79,12 +48,9 @@ const SidebarComponent = () => {
     });
   }, [location.pathname]);
 
-  const filteredSidebarOptions =
-    userType === 1
-      ? sidebarOptions // Show all options for userType 1
-      : sidebarOptions.filter((option) =>
-          ["Dashboard", "Appointment", "Staff"].includes(option.name)
-        ); // Show limited options for userType 2
+  const filteredSidebarOptions = sidebarOptions.filter((option) =>
+    ["Dashboard", "Appointment", "All Staffs"].includes(option.name)
+  ); // Show limited options for userType 2
   return (
     <div className={`sidebar ${isSidebarCollapsed ? "collapsed" : ""}`}>
       <div
@@ -178,4 +144,4 @@ const SidebarComponent = () => {
   );
 };
 
-export default SidebarComponent;
+export default SidebarComponent2;

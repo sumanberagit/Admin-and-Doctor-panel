@@ -64,7 +64,7 @@ const AddDoctor = () => {
       );
       setMessage("Doctor added successfully!"); // Set success message
       setMessageType("success"); // Set message type to success
-      dispatch(setUserType(response.data.userType));
+      dispatch(setUserType(response.data.doctor.userType));
       console.log(">>>>>>>>>>>>>>>", response.data.doctor.userType);
       navigate("/dashboard");
     } catch (error) {
