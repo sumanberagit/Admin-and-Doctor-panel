@@ -12,6 +12,7 @@ import Profile from "../pages/Patients/Profile/Profile";
 import InviteDoctor from "../pages/Doctor/InviteDoctor/InviteDoctor";
 import AddStaff from "../pages/Staffs/AddStaff/AddStaff";
 import AllStaffs from "../pages/Staffs/AllStaffs/Allstaffs";
+import CalendarWithTimePicker from "../pages/Calandar/CalendarWithTimePicker";
 
 const AppRoutes = () => {
   return (
@@ -29,6 +30,7 @@ const AppRoutes = () => {
         <Route path="/doctors/invite-doctor" index element={<InviteDoctor />} />
         <Route path="/staffs/add-staff" index element={<AddStaff />} />
         <Route path="/allstaffs" index element={<AllStaffs />} />
+        <Route path="/calendar" index element={<CalendarWithTimePicker />} />
       </Routes>
     </BrowserRouter>
   );

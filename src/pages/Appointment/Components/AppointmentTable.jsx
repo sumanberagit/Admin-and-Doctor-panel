@@ -1,88 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios"; // Axios for API calls
 import Action1 from "../../../assets/icons/Action1.svg";
-import Action2 from "../../../assets/icons/Action2.svg";
-import Action3 from "../../../assets/icons/Action3.svg";
 import AppointMentDetailModal from "./Modal/AppointMentDetailModal";
 
-const patients = [
-  {
-    id: 1,
-    name: "Wendy Filson",
-    email: "wendy@contact.com",
-    age: 28,
-    gender: "Female",
-    department: "Gynecology",
-    date: "29th Nov 2023",
-    time: "11:00AM",
-    doctor: "Dr. Cristino Murphy",
-    doctorImage: "https://randomuser.me/api/portraits/men/2.jpg",
-    fees: "$ 300",
-  },
-  {
-    id: 2,
-    name: "Wendy Filson",
-    email: "wendy@contact.com",
-    age: 28,
-    gender: "Female",
-    department: "Gynecology",
-    date: "29th Nov 2023",
-    time: "11:00AM",
-    doctor: "Dr. Cristino Murphy",
-    doctorImage: "https://randomuser.me/api/portraits/men/2.jpg",
-    fees: "$ 300",
-  },
-  {
-    id: 3,
-    name: "Wendy Filson",
-    email: "wendy@contact.com",
-    age: 28,
-    gender: "Female",
-    department: "Gynecology",
-    date: "29th Nov 2023",
-    time: "11:00AM",
-    doctor: "Dr. Cristino Murphy",
-    doctorImage: "https://randomuser.me/api/portraits/men/2.jpg",
-    fees: "$ 300",
-  },
-  {
-    id: 4,
-    name: "Wendy Filson",
-    email: "wendy@contact.com",
-    age: 28,
-    gender: "Female",
-    department: "Gynecology",
-    date: "29th Nov 2023",
-    time: "11:00AM",
-    doctor: "Dr. Cristino Murphy",
-    doctorImage: "https://randomuser.me/api/portraits/men/2.jpg",
-    fees: "$ 300",
-  },
-  {
-    id: 5,
-    name: "Wendy Filson",
-    email: "wendy@contact.com",
-    age: 28,
-    gender: "Female",
-    department: "Gynecology",
-    date: "29th Nov 2023",
-    time: "11:00AM",
-    doctor: "Dr. Cristino Murphy",
-    doctorImage: "https://randomuser.me/api/portraits/men/2.jpg",
-    fees: "$ 300",
-  },
-  // Add the rest of the patient data here...
-];
-
 const AppointmentTable = () => {
+  const [patients, setPatients] = useState([]); // Initialize with an empty array
   const [showModal, setShowModal] = useState(false);
+  const [selectedPatient, setSelectedPatient] = useState(null); // State for storing selected patient data
 
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  useEffect(() => {
+    // Fetch appointment data on component mount
+    const fetchAppointments = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:8080/appointment/all-appointments"
+        );
+        setPatients(res.data); // Corrected to res.data
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    };
+
+    fetchAppointments();
+  }, []);
+
+  const openModal = (patient) => {
+    setSelectedPatient(patient); // Set the clicked patient's data
+    setShowModal(true); // Show the modal
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedPatient(null); // Clear the selected patient when modal closes
+  };
+
   return (
     <div className="overflow-x-auto mx-5 my-5 ">
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr className="bg-gray-100">
+            {/* Table Headers */}
             <th className="px-6 py-3 border-b text-left text-sm font-bold text-gray-900 ">
               #
             </th>
@@ -99,9 +56,6 @@ const AppointmentTable = () => {
               Gender
             </th>
             <th className="px-6 py-3 border-b text-left text-sm font-bold text-gray-900 ">
-              Department
-            </th>
-            <th className="px-6 py-3 border-b text-left text-sm font-bold text-gray-900 ">
               Date
             </th>
             <th className="px-6 py-3 border-b text-left text-sm font-bold text-gray-900 ">
@@ -111,73 +65,76 @@ const AppointmentTable = () => {
               Doctor
             </th>
             <th className="px-6 py-3 border-b text-left text-sm font-bold text-gray-900 ">
-              Fess
+              Disease
             </th>
+
             <th className="px-6 py-3 border-b text-left text-sm font-bold text-gray-900 "></th>
           </tr>
         </thead>
         <tbody>
-          {patients.map((patient) => (
-            <tr key={patient.id}>
-              <td className=" py-4 border-b text-sm text-gray-700 tex text-center">
-                {patient.id}
-              </td>
-              <td className=" flex flex-row items-center mr-2 py-4 border-b text-sm text-gray-700 text-center">
-                <img
-                  src="https://via.placeholder.com/50"
-                  alt="img"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                {patient.name}
-              </td>
-              <td className=" py-4 border-b text-sm text-gray-700 text-center">
-                {patient.age}
-              </td>
-              <td className=" py-4 border-b text-sm text-gray-700 text-center">
-                {patient.email}
-              </td>
-              <td className=" py-4 border-b text-sm text-gray-700 text-center">
-                {patient.gender}
-              </td>
-              <td className=" py-4 border-b text-sm text-gray-700 text-center">
-                {patient.department}
-              </td>
-              <td className=" py-4 border-b text-sm text-gray-700 text-center">
-                {patient.date}
-              </td>
-              <td className=" py-4 border-b text-sm text-gray-700 text-center">
-                {patient.time}
-              </td>
-              <td className=" flex flex-row py-4 border-b items-center text-sm text-gray-700 text-center">
-                <img
-                  src="https://via.placeholder.com/50"
-                  alt="img"
-                  className="w-12 h-12 rounded-full mr-4"
-                />
-                {patient.doctor}
-              </td>
-
-              <td className=" py-4 border-b text-sm text-gray-700 text-center">
-                {patient.fees}
-              </td>
-              <td className=" py-4 border-b text-sm text-gray-700 text-center">
-                <div className=" flex flex-row">
+          {/* Ensure patients is an array before mapping */}
+          {patients && patients.length > 0 ? (
+            patients.map((patient, idx) => (
+              <tr key={patient.id}>
+                <td className="py-4 border-b text-sm text-gray-700 text-center">
+                  {idx + 1}
+                </td>
+                <td className="py-4 border-b text-sm text-gray-700 text-center">
+                  {patient.name}
+                </td>
+                <td className="py-4 border-b text-sm text-gray-700 text-center">
+                  {patient.age}
+                </td>
+                <td className="py-4 border-b text-sm text-gray-700 text-center">
+                  {patient.user.email}
+                </td>
+                <td className="py-4 border-b text-sm text-gray-700 text-center">
+                  {patient.user.gender}
+                </td>
+                <td className="py-4 border-b text-sm text-gray-700 text-center">
+                  {new Date(patient.date).toLocaleDateString("en-CA")}
+                </td>
+                <td className="py-4 border-b text-sm text-gray-700 text-center">
+                  {patient.time}
+                </td>
+                <td className="flex items-center py-4 border-b text-sm text-gray-700 text-center">
                   <img
-                    src={Action1}
-                    alt=""
-                    onClick={openModal}
-                    className=" cursor-pointer"
+                    src={"https://via.placeholder.com/50"}
+                    alt="doc"
+                    className="w-12 h-12 rounded-full mr-4"
                   />
-                  {/* <img src={Action2} alt="" />
-                  <img src={Action3} alt="" /> */}
-                </div>
+                  {patient.doctor.firstName}
+                </td>
+                <td className="py-4 border-b text-sm text-gray-700 text-center">
+                  {patient.disease}
+                </td>
+
+                <td className="py-4 border-b text-sm text-gray-700 text-center">
+                  <div className="flex">
+                    <img
+                      src={Action1}
+                      alt="action"
+                      onClick={() => openModal(patient)} // Pass the patient data to modal
+                      className="cursor-pointer"
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="11" className="text-center py-4">
+                No appointments available.
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
-
-      <AppointMentDetailModal show={showModal} onClose={closeModal} />
+      <AppointMentDetailModal
+        show={showModal}
+        onClose={closeModal}
+        patient={selectedPatient} // Pass selected patient data to the modal
+      />
     </div>
   );
 };

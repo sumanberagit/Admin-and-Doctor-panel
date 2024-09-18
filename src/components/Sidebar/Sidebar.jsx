@@ -16,6 +16,7 @@ const sidebarOptions = [
   { name: "Dashboard", icon: Home, link: "/dashboard" },
   { name: "Appointment", icon: Properties, link: "/appointment" },
   { name: "All Staffs", icon: Properties, link: "/allstaffs" },
+  { name: "Select Check Up Time", icon: Properties, link: "/calendar" },
 ];
 
 const SidebarComponent2 = () => {
@@ -24,7 +25,7 @@ const SidebarComponent2 = () => {
   const location = useLocation();
   const token = useSelector((state) => state.token);
   const userType = useSelector((state) => state.setUserType);
-  console.log("..........", userType);
+  // console.log("..........", userType);
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
@@ -49,7 +50,9 @@ const SidebarComponent2 = () => {
   }, [location.pathname]);
 
   const filteredSidebarOptions = sidebarOptions.filter((option) =>
-    ["Dashboard", "Appointment", "All Staffs"].includes(option.name)
+    ["Dashboard", "Appointment", "All Staffs", "Select Check Up Time"].includes(
+      option.name
+    )
   ); // Show limited options for userType 2
   return (
     <div className={`sidebar ${isSidebarCollapsed ? "collapsed" : ""}`}>

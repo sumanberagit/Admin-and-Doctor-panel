@@ -1,0 +1,9 @@
+.react-datepicker__month-container {
+  width: 100%;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #4299e1; /* Tailwind blue */
+  color: white;
+}
