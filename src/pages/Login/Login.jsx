@@ -9,7 +9,7 @@ import {
   setToken,
   setUserType,
   setDepartments,
-  // setUserId,
+  setUserId,
   // setUserName,
   // setExpertise,
   // setContact,
@@ -28,21 +28,19 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://consultant-backend-jiwv.onrender.com/signin",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("http://localhost:8080/signin", {
+        email,
+        password,
+      });
 
       if (response.status === 200) {
         const { token } = response.data;
         localStorage.setItem("token", token);
         dispatch(setToken(token));
         dispatch(setUserType(response.data.userType));
+        dispatch(setUserId(response.data.id));
 
-        console.log("userType", response.data.userType);
+        console.log("userType", response.data.id);
         console.log("?????????????", response.data.Departments);
 
         setErrorMessage("");

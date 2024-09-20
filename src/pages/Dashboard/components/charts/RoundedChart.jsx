@@ -6,7 +6,7 @@ const yearOptions = [2022, 2021];
 const RoundedChart = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [chartOptions, setChartOptions] = useState({
-    series: [44, 55, 67, 83],
+    series: [55, 67, 10],
     options: {
       chart: {
         height: 400,
@@ -31,7 +31,7 @@ const RoundedChart = () => {
           },
         },
       },
-      labels: ["Apples", "Oranges", "Bananas", "Berries"],
+      labels: ["Male", "Female", "Others"],
     },
   });
 

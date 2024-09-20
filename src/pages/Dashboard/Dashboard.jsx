@@ -18,15 +18,16 @@ const Dashboard = () => {
     patientCount: 0,
     staffCount: 0,
     appointmentCount: 0,
+    doctorAppointmentCounts: [],
   });
 
   const userType = useSelector((state) => state.setUserType);
-
+  const doctorId = useSelector((state) => state.setUserId);
   useEffect(() => {
     const fetchCounts = async () => {
       try {
         const response = await axios.get(
-          "https://consultant-backend-jiwv.onrender.com/counts/all-counts"
+          "http://localhost:8080/counts/all-counts"
         );
         setCounts(response.data.counts);
         console.log(response.data.counts);
@@ -38,18 +39,30 @@ const Dashboard = () => {
     fetchCounts();
   }, []);
 
+  const getAppointmentCount = () => {
+    if (userType === 1) {
+      return counts.appointmentCount;
+    } else if (userType === 2) {
+      const doctorData = counts.doctorAppointmentCounts.find(
+        (doc) => doc.doctorId === doctorId
+      );
+      return doctorData ? doctorData.count : 0;
+    }
+    return 0;
+  };
+
   return (
     <BaseLayout>
       <h3 className="mx-5 py-4 font-bold text-gray-700 text-lg">Dashboard</h3>
       <div className="flex space-x-4 mx-5 justify-center row">
-        <div className=" rounded-md gap-5 w-[220px]  h-[140px] bg-white border border-gray-300 shadow-md flex items-center justify-center">
+        <div className="rounded-md gap-5 w-[220px] h-[140px] bg-white border border-gray-300 shadow-md flex items-center justify-center">
           <div className="flex items-center space-x-4">
             <img
               src={patients}
               alt="Patients"
               className="w-[60px] h-[60px] object-cover"
             />
-            <div className=" text-left">
+            <div className="text-left">
               <h4 className="text-xl font-bold text-black">
                 {counts.patientCount}
               </h4>
@@ -57,27 +70,27 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className=" w-[220px] rounded-md gap-5 h-[140px] bg-white border border-gray-300 shadow-md flex items-center justify-center">
+        <div className="w-[220px] rounded-md gap-5 h-[140px] bg-white border border-gray-300 shadow-md flex items-center justify-center">
           <div className="flex items-center space-x-4">
             <img
               src={cost}
               alt="Avg Cost"
               className="w-[60px] h-[60px] object-cover"
             />
-            <div className=" text-left">
+            <div className="text-left">
               <h4 className="text-xl font-bold text-black">$1200</h4>
-              <h4 className="text-lg font-normal text-gray-500">Avg.Cost</h4>
+              <h4 className="text-lg font-normal text-gray-500">Avg. Cost</h4>
             </div>
           </div>
         </div>
-        <div className="w-[220px] rounded-md  gap-5 h-[140px] bg-white border border-gray-300 shadow-md flex items-center justify-center">
+        <div className="w-[220px] rounded-md gap-5 h-[140px] bg-white border border-gray-300 shadow-md flex items-center justify-center">
           <div className="flex items-center space-x-4">
             <img
               src={staff}
               alt="Staff Members"
               className="w-[60px] h-[60px] object-cover"
             />
-            <div className=" text-left">
+            <div className="text-left">
               <h4 className="text-xl font-bold text-black">
                 {counts.staffCount}
               </h4>
@@ -87,16 +100,16 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="w-[220px] rounded-md  gap-5 h-[140px] bg-white border border-gray-300 shadow-md flex items-center justify-center">
+        <div className="w-[220px] rounded-md gap-5 h-[140px] bg-white border border-gray-300 shadow-md flex items-center justify-center">
           <div className="flex items-center space-x-4">
             <img
               src={Appointment}
               alt="Appointments"
               className="w-[60px] h-[60px] object-cover"
             />
-            <div className=" text-left">
+            <div className="text-left">
               <h4 className="text-xl font-bold text-black">
-                {counts.appointmentCount}
+                {getAppointmentCount()} {/* Display the calculated count */}
               </h4>
               <h4 className="text-lg font-normal text-gray-500">Appointment</h4>
             </div>
@@ -109,7 +122,7 @@ const Dashboard = () => {
               alt="All Queries"
               className="w-[60px] h-[60px] object-cover"
             />
-            <div className=" text-left">
+            <div className="text-left">
               <h4 className="text-xl font-bold text-black">
                 {counts.pqueryCount}
               </h4>
@@ -118,10 +131,10 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className=" mt-10">
+      <div className="mt-10">
         <Charts />
       </div>
-      <div className=" flex flex-row mt-10 mb-10">
+      <div className="flex flex-row mt-10 mb-10">
         <Appointments />
         <PatientReview />
         <QueryListing />

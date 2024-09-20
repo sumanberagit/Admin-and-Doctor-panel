@@ -2,7 +2,18 @@ import React from "react";
 import profile from "../../../../assets/images/google.png";
 import bg from "../../../../assets/images/trioakBg.png";
 
-const ProfileCard = () => {
+const ProfileCard = ({ patientData }) => {
+  // Destructure necessary data from patientData
+  const {
+    name,
+    age,
+    gender,
+    phone,
+    location,
+    blood_group,
+    // Add more fields as necessary based on your API response
+  } = patientData;
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg h-[550px] w-[900px]">
       <div className="relative">
@@ -20,10 +31,9 @@ const ProfileCard = () => {
         />
       </div>
       <div className="text-center mt-20">
-        <h2 className="text-2xl font-semibold">Christopher Burrell</h2>
-        <p className="text-gray-500">25 Years old</p>
+        <h2 className="text-2xl font-semibold">{name}</h2>
+        <p className="text-gray-500">{age} Years old</p>
         <div className="mt-4">
-          <p className="text-sm text-gray-500">Complete your profile</p>
           <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
             <div
               className="bg-blue-500 h-2 rounded-full"
@@ -33,20 +43,18 @@ const ProfileCard = () => {
         </div>
         <div className="mt-4 space-y-2 text-left">
           <p>
-            <strong>Gender:</strong> Female
+            <strong>Gender:</strong> {gender}
           </p>
           <p>
-            <strong>Birthday:</strong> 19th January 1995
+            <strong>Phone No.:</strong> {phone}
           </p>
           <p>
-            <strong>Phone No.:</strong> +1 (125) 458-8547
+            <strong>Address:</strong> {location}
           </p>
           <p>
-            <strong>Address:</strong> Sydney, Australia
+            <strong>Blood Group:</strong> {blood_group}
           </p>
-          <p>
-            <strong>Blood Group:</strong> B +
-          </p>
+          {/* Add more fields as necessary */}
         </div>
       </div>
     </div>

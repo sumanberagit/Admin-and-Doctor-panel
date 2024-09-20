@@ -17,9 +17,9 @@ export const setToken = (token) => ({
   payload: token,
 });
 
-export const setUserId = (userId) => ({
+export const setUserId = (setUserId) => ({
   type: SET_USER_ID,
-  payload: userId,
+  payload: setUserId,
 });
 
 export const setUserName = (userName) => ({
@@ -69,7 +69,7 @@ export const setBio = (setBio) => ({
 // Initial state
 const initialState = {
   token: null,
-  userId: null,
+  setUserId: null,
   userName: null,
   userExperties: null,
   userContact: null,
@@ -87,7 +87,7 @@ const authReducer = (state = initialState, action) => {
     case SET_TOKEN:
       return { ...state, token: action.payload };
     case SET_USER_ID:
-      return { ...state, userId: action.payload };
+      return { ...state, setUserId: action.payload };
     case SET_USER_NAME:
       return { ...state, userName: action.payload };
     case SET_USER_EXPERTIES:
