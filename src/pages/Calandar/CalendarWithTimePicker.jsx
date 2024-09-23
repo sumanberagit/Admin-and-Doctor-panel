@@ -66,11 +66,14 @@ const AttendanceCalendar = () => {
   useEffect(() => {
     const fetchCheckupDates = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/doctor/dates", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://consultant-backend-jiwv.onrender.com/doctor/dates",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (
           response.data.success &&
@@ -251,7 +254,7 @@ const AttendanceCalendar = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:8080/doctor/set-checkup-times",
+          "https://consultant-backend-jiwv.onrender.com/doctor/set-checkup-times",
           payload,
           {
             headers: {

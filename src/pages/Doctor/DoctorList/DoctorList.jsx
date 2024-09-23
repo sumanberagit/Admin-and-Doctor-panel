@@ -14,7 +14,7 @@ const DoctorsList = () => {
 
   useEffect(() => {
     axios
-      .get("https://consultant-backend-jiwv.onrender.com/public/doctor")
+      .get("http://localhost:8080/public/doctor")
       .then((response) => {
         const doctorsData = response.data.doctors;
         setDoctors(doctorsData);

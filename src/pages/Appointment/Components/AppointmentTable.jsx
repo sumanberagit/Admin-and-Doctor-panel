@@ -17,7 +17,7 @@ const DoctorAppointmentTable = () => {
     const fetchAppointments = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/appointment/all-appointments",
+          "https://consultant-backend-jiwv.onrender.com/appointment/all-appointments",
           {
             headers: {
               Authorization: `Bearer ${token}`, // Use token from Redux

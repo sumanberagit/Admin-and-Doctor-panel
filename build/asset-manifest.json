@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d0651b43.css",
-    "main.js": "/static/js/main.be74101e.js",
+    "main.css": "/static/css/main.e534f2aa.css",
+    "main.js": "/static/js/main.ca43e675.js",
     "static/media/trash-bin.gif": "/static/media/trash-bin.e7ef0d0094f8cdcba81f.gif",
     "static/media/trioakBg.png": "/static/media/trioakBg.c0c961941dae27425d2d.png",
     "static/media/google.png": "/static/media/google.3b44a32b77f4074c1956.png",
@@ -9,9 +9,7 @@
     "static/media/twitter.png": "/static/media/twitter.894988327f8d68209e91.png",
     "static/media/Setting.svg": "/static/media/Setting.020b82641f746b7759607ac9b72e395c.svg",
     "static/media/staff.svg": "/static/media/staff.429dd4abb708a213ba5efb86d338feea.svg",
-    "static/media/Action3.svg": "/static/media/Action3.8394aade2abc3438d322d1a04b1daeca.svg",
     "static/media/Action1.svg": "/static/media/Action1.fb7c8300c82c5d8bafa8f805da751f44.svg",
-    "static/media/Action2.svg": "/static/media/Action2.894cc2a33d71887e0aa062b444f1e98c.svg",
     "static/media/Covid.svg": "/static/media/Covid.4f792e50311fa425947e2686359fded1.svg",
     "static/media/file.svg": "/static/media/file.ecc8fb03cb4e500aa7bfe0b30fbde60b.svg",
     "static/media/contacts.svg": "/static/media/contacts.e902ba28bee97a263ee2e838fdfc0b5d.svg",
@@ -40,11 +38,11 @@
     "static/media/home-outline.svg": "/static/media/home-outline.9b710a8631f2684043648b674929654d.svg",
     "static/media/star.svg": "/static/media/star.d93daaa46c8b7f94524291f3054a91c7.svg",
     "static/media/rightarrow.svg": "/static/media/rightarrow.5478010a2fb05af753861b1459cc80df.svg",
-    "main.d0651b43.css.map": "/static/css/main.d0651b43.css.map",
-    "main.be74101e.js.map": "/static/js/main.be74101e.js.map"
+    "main.e534f2aa.css.map": "/static/css/main.e534f2aa.css.map",
+    "main.ca43e675.js.map": "/static/js/main.ca43e675.js.map"
   },
   "entrypoints": [
-    "static/css/main.d0651b43.css",
-    "static/js/main.be74101e.js"
+    "static/css/main.e534f2aa.css",
+    "static/js/main.ca43e675.js"
   ]
 }

@@ -10,6 +10,7 @@ const Appointment = () => {
   const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const userType = useSelector((state) => state.setUserType);
+  const userId = useSelector((state) => state.setUserId);
 
   // Fetch data based on userType
   useEffect(() => {
@@ -25,9 +26,9 @@ const Appointment = () => {
         } else if (userType === 2) {
           // Fetch appointments data
           const response = await axios.get(
-            "https://consultant-backend-jiwv.onrender.com/public/appointments"
+            `https://consultant-backend-jiwv.onrender.com/doctor/${userId}/appointments`
           );
-          setAppointments(response.data.appointments); // Assuming the response contains an 'appointments' array
+          setAppointments(response.data.appointments);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -38,6 +39,11 @@ const Appointment = () => {
 
     fetchData();
   }, [userType]); // Dependency array includes userType to refetch data if userType changes
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split("T")[0]; // Returns date in YYYY-MM-DD format
+  };
 
   return (
     <div className="flex row space-x-4 mx-5">
@@ -98,10 +104,13 @@ const Appointment = () => {
                       {/* Customize this section based on your appointment data */}
                       <div>
                         <p className="font-medium">
-                          Appointment with {appointment.doctorName}
+                          Appointment with{" "}
+                          <span className="text-blue-500">
+                            {appointment.user.name}
+                          </span>
                         </p>
                         <p className="text-gray-500 text-sm">
-                          Date: {appointment.date}
+                          Date: {formatDate(appointment.date)}
                         </p>
                         {/* Add more fields as needed */}
                       </div>

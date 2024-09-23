@@ -8,30 +8,29 @@ import { useDispatch } from "react-redux";
 import {
   setToken,
   setUserType,
-  setDepartments,
   setUserId,
-  // setUserName,
-  // setExpertise,
-  // setContact,
-  // setDescription,
-  // setAmount,
 } from "../../redux/Reducer/AuthReducer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when login starts
 
     try {
-      const response = await axios.post("http://localhost:8080/signin", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://consultant-backend-jiwv.onrender.com/signin",
+        {
+          email,
+          password,
+        }
+      );
 
       if (response.status === 200) {
         const { token } = response.data;
@@ -39,9 +38,6 @@ const Login = () => {
         dispatch(setToken(token));
         dispatch(setUserType(response.data.userType));
         dispatch(setUserId(response.data.id));
-
-        console.log("userType", response.data.id);
-        console.log("?????????????", response.data.Departments);
 
         setErrorMessage("");
         navigate("/dashboard");
@@ -52,6 +48,8 @@ const Login = () => {
       } else {
         setErrorMessage("An error occurred. Please try again.");
       }
+    } finally {
+      setLoading(false); // Set loading to false after API response
     }
   };
 
@@ -140,12 +138,21 @@ const Login = () => {
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Sign in
-            </button>
+            {loading ? ( // Conditional rendering for loader or button
+              <button
+                disabled
+                className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 opacity-50"
+              >
+                Loading...
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Sign in
+              </button>
+            )}
           </div>
 
           <div className="flex justify-center text-sm text-gray-500">Or</div>

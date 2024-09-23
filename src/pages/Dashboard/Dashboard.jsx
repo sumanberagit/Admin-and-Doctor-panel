@@ -27,7 +27,7 @@ const Dashboard = () => {
     const fetchCounts = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/counts/all-counts"
+          "https://consultant-backend-jiwv.onrender.com/counts/all-counts"
         );
         setCounts(response.data.counts);
         console.log(response.data.counts);

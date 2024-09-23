@@ -18,7 +18,7 @@ const Profile = () => {
     const fetchPatientData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/patient/${patientId}`
+          `https://consultant-backend-jiwv.onrender.com/patient/${patientId}`
         ); // Adjust API endpoint as necessary
         setPatientData(response.data.data);
         console.log("............", response.data.data.name);
