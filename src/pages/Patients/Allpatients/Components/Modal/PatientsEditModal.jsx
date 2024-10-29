@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const PatientsEditModal = ({ show, onClose }) => {
   if (!show) return null;
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white shadow-md rounded-lg p-8 max-w-lg w-full">
-        <div className='flex justify-between items-center mb-8'>
+        <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold">Profile Setting</h2>
           <button
             onClick={onClose}
@@ -15,7 +15,7 @@ const PatientsEditModal = ({ show, onClose }) => {
           </button>
         </div>
 
-        <hr className=' mb-5' />
+        <hr className=" mb-5" />
 
         <div className="flex items-center mb-6">
           <img
@@ -25,7 +25,8 @@ const PatientsEditModal = ({ show, onClose }) => {
           />
           <div className="flex flex-col">
             <span className="text-sm text-gray-600 mb-2">
-              For best results, use an image at least 256px by 256px in either .jpg or .png format
+              For best results, use an image at least 256px by 256px in either
+              .jpg or .png format
             </span>
             <div className="flex space-x-4">
               <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
@@ -40,7 +41,10 @@ const PatientsEditModal = ({ show, onClose }) => {
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="firstName">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="firstName"
+            >
               First Name
             </label>
             <input
@@ -51,7 +55,10 @@ const PatientsEditModal = ({ show, onClose }) => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="lastName">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="lastName"
+            >
               Last Name
             </label>
             <input
@@ -65,7 +72,10 @@ const PatientsEditModal = ({ show, onClose }) => {
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="email"
+            >
               Your Email
             </label>
             <input
@@ -76,7 +86,10 @@ const PatientsEditModal = ({ show, onClose }) => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="phone">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="phone"
+            >
               Phone no.
             </label>
             <input
@@ -89,7 +102,10 @@ const PatientsEditModal = ({ show, onClose }) => {
         </div>
 
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="bio">
+          <label
+            className="block text-gray-700 text-sm font-semibold mb-2"
+            htmlFor="bio"
+          >
             Your Bio Here
           </label>
           <textarea
@@ -105,7 +121,7 @@ const PatientsEditModal = ({ show, onClose }) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PatientsEditModal
+export default PatientsEditModal;

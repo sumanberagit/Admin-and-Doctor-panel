@@ -143,7 +143,7 @@ const ProfileControll = ({ showinvoice }) => {
               </div>
 
               {/* Contact Us Section */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
+              {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
                 <div className="bg-gray-50 p-4 rounded-md shadow-sm flex items-center">
                   <div className="text-blue-500 text-4xl mr-4">
                     <i className="fas fa-envelope"></i>
@@ -163,7 +163,7 @@ const ProfileControll = ({ showinvoice }) => {
                     <p className="text-blue-600 text-sm">View more →</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           )}
         </div>

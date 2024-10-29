@@ -3,6 +3,8 @@ import React from "react";
 const StaffsViewModal = ({ show, onClose, staff }) => {
   if (!show || !staff) return null;
 
+  const initials = `${staff.firstName[0]}${staff.lastName[0]}`;
+
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full relative">
@@ -16,11 +18,9 @@ const StaffsViewModal = ({ show, onClose, staff }) => {
           <h2 className="text-2xl font-bold mb-6">Profile</h2>
         </div>
         <div className="flex items-center mb-4">
-          <img
-            src="https://via.placeholder.com/50"
-            alt="Profile"
-            className="w-12 h-12 rounded-full mr-4"
-          />
+          <div className="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-white text-lg font-bold mr-4">
+            {initials}
+          </div>
           <div>
             <h3 className="text-lg font-semibold">
               {staff.firstName} {staff.lastName}

@@ -1,7 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.e534f2aa.css",
-    "main.js": "/static/js/main.ca43e675.js",
+    "main.css": "/static/css/main.04c0eead.css",
+    "main.js": "/static/js/main.cc19601a.js",
+    "static/media/jurica-koletic-7YVZYZeITc8-unsplash.jpg": "/static/media/jurica-koletic-7YVZYZeITc8-unsplash.5f43727709f097ae75e7.jpg",
+    "static/media/alex-suprun-ZHvM3XIOHoE-unsplash.jpg": "/static/media/alex-suprun-ZHvM3XIOHoE-unsplash.788de38dd8dd65143047.jpg",
     "static/media/trash-bin.gif": "/static/media/trash-bin.e7ef0d0094f8cdcba81f.gif",
     "static/media/trioakBg.png": "/static/media/trioakBg.c0c961941dae27425d2d.png",
     "static/media/google.png": "/static/media/google.3b44a32b77f4074c1956.png",
@@ -38,11 +40,11 @@
     "static/media/home-outline.svg": "/static/media/home-outline.9b710a8631f2684043648b674929654d.svg",
     "static/media/star.svg": "/static/media/star.d93daaa46c8b7f94524291f3054a91c7.svg",
     "static/media/rightarrow.svg": "/static/media/rightarrow.5478010a2fb05af753861b1459cc80df.svg",
-    "main.e534f2aa.css.map": "/static/css/main.e534f2aa.css.map",
-    "main.ca43e675.js.map": "/static/js/main.ca43e675.js.map"
+    "main.04c0eead.css.map": "/static/css/main.04c0eead.css.map",
+    "main.cc19601a.js.map": "/static/js/main.cc19601a.js.map"
   },
   "entrypoints": [
-    "static/css/main.e534f2aa.css",
-    "static/js/main.ca43e675.js"
+    "static/css/main.04c0eead.css",
+    "static/js/main.cc19601a.js"
   ]
 }

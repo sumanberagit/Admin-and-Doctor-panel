@@ -2,7 +2,6 @@ import React from "react";
 import RoundedChart from "./RoundedChart";
 import BarChart from "./BarChart";
 
-
 const Charts = () => {
   return (
     <div className="flex row space-x-4 mx-5 justify-center ">

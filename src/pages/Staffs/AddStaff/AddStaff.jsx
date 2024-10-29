@@ -20,8 +20,7 @@ const AddStaff = () => {
 
   // State to hold response or error messages and their types
   const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState(""); // 'success' or 'error'
-
+  const [messageType, setMessageType] = useState("");
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -105,17 +104,17 @@ const AddStaff = () => {
     <BaseLayout>
       <div className="min-h-screen bg-gray-50 mb-16">
         {/* Header */}
-        <div className="mx-5 flex justify-between">
+        {/* <div className="mx-5 flex justify-between">
           <h3 className="py-2 font-bold text-gray-700 text-lg">
-            Complete The Profile
+            Complete Staff Profile
           </h3>
-        </div>
+        </div> */}
 
         {/* Main Content */}
         <div className="flex justify-center">
           {/* Form Container */}
           <form
-            className="bg-white shadow-md rounded-lg p-6 w-full max-w-4xl"
+            className=""
             onSubmit={handleSubmit}
             encType="multipart/form-data"
           >
@@ -138,14 +137,14 @@ const AddStaff = () => {
                 />
               </label>
               <div className="flex flex-col">
-                <h2 className="text-xl font-bold">Upload your picture</h2>
+                <h2 className="text-xl font-bold">Upload profile picture</h2>
                 <span className="text-sm text-gray-500">
                   For best results, use an image at least 600px by 600px in
                   either .jpg or .png format
                 </span>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
               <div>
                 <label className="block text-gray-600">First Name</label>
                 <input
@@ -154,7 +153,7 @@ const AddStaff = () => {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   placeholder="First Name"
-                  className="w-full mt-2 p-2 border rounded"
+                  className="w-full mt-4 p-2 border rounded"
                   required
                 />
               </div>
@@ -189,7 +188,7 @@ const AddStaff = () => {
                   value={formData.contact}
                   onChange={handlePhoneChange}
                   placeholder="Phone no."
-                  className="w-full mt-2 p-2 border rounded"
+                  className="w-full mt-2 p-1 border rounded"
                   required
                 />
               </div>
@@ -202,7 +201,7 @@ const AddStaff = () => {
                   className="w-full mt-2 p-2 border rounded"
                   required
                 >
-                  <option value="">Select Department</option>
+                  <option className="">Select Department</option>
                   <option value="Nurse">Nurse</option>
                   <option value="Medical technologists">
                     Medical technologists
@@ -229,7 +228,7 @@ const AddStaff = () => {
               </div>
             </div>
             <div className="mt-6">
-              <label className="block text-gray-600">Your Bio Here</label>
+              <label className="block text-gray-600">Add Bio</label>
               <textarea
                 name="bio"
                 value={formData.bio}

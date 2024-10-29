@@ -3,7 +3,12 @@ import Telephone from "../../../../assets/icons/telephone.png";
 import Mail from "../../../../assets/icons/mail.png";
 import Time from "../../../../assets/icons/time.png";
 import "../DoctorProfile.css";
+import { useLocation } from "react-router-dom"; // Import useLocation
+
 const TimeTable = () => {
+  const location = useLocation();
+  const { contact, email } = location.state || {}; // Get contact and email from state
+
   const schedule = [
     { day: "Monday", time: "8.00 - 20.00" },
     { day: "Tuesday", time: "8.00 - 20.00" },
@@ -16,7 +21,7 @@ const TimeTable = () => {
 
   return (
     <div className="p-2 bg-white">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6  items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
         <div className="p-6 rounded-md shadow-lg">
           <ul>
             {schedule.map((item, index) => (
@@ -44,8 +49,8 @@ const TimeTable = () => {
                 Great doctor if you need your family member to get effective
                 immediate assistance
               </p>
-              <a href="tel:+152534468854" className="text-blue-600">
-                +152 534-468-854
+              <a href={`tel:${contact}`} className="text-blue-600">
+                {contact}
               </a>
             </div>
           </div>
@@ -59,8 +64,8 @@ const TimeTable = () => {
                 Great doctor if you need your family member to get effective
                 immediate assistance
               </p>
-              <a href="mailto:contact@example.com" className="text-blue-600">
-                contact@example.com
+              <a href={`mailto:${email}`} className="text-blue-600">
+                {email}
               </a>
             </div>
           </div>

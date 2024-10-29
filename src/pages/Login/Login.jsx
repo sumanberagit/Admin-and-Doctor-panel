@@ -99,7 +99,7 @@ const Login = () => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                onFocus={clearErrorMessage} // Clear the error message when the input field is focused
+                onFocus={clearErrorMessage}
               />
             </div>
           </div>
@@ -138,7 +138,7 @@ const Login = () => {
           </div>
 
           <div>
-            {loading ? ( // Conditional rendering for loader or button
+            {loading ? (
               <button
                 disabled
                 className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 opacity-50"

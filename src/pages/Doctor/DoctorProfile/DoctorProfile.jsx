@@ -97,23 +97,21 @@ const DoctorProfile = () => {
           {/* White Section */}
           <div className="mt-16 bg-white p-6">
             <nav className="flex ">
-              {["Overview", "Experience", "Time Table", "Settings"].map(
-                (tab, index) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`flex-1 text-sm font-medium py-3.5 transition duration-300 ${
-                      activeTab === tab
-                        ? "bg-blue-500 text-white"
-                        : "bg-grayM text-black hover:bg-blue-100 hover:text-blue-500"
-                    } ${index === 0 ? "rounded-l-md " : ""} ${
-                      index === 3 ? "rounded-r-md " : ""
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                )
-              )}
+              {["Overview", "Time Table", "Settings"].map((tab, index) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`flex-1 text-sm font-medium py-3.5 transition duration-300 ${
+                    activeTab === tab
+                      ? "bg-blue-500 text-white"
+                      : "bg-grayM text-black hover:bg-blue-100 hover:text-blue-500"
+                  } ${index === 0 ? "rounded-l-md " : ""} ${
+                    index === 3 ? "rounded-r-md " : ""
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
             </nav>
           </div>
         </div>

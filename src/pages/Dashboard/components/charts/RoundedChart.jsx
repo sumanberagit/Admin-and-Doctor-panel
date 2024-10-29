@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const yearOptions = [2022, 2021];
+
 const RoundedChart = () => {
   const [isOpen, setIsOpen] = useState(false);
   const userType = useSelector((state) => state.setUserType);
@@ -20,12 +21,10 @@ const RoundedChart = () => {
         type: "radialBar",
         events: {
           dataPointMouseEnter: function (event, chartContext, config) {
-            // On hover, show the percentage for the hovered gender
             const hoveredSeries = config.w.config.series[config.dataPointIndex];
             setTotalLabel(`${hoveredSeries}%`);
           },
           dataPointMouseLeave: function () {
-            // When not hovering, show the total count of appointments
             setTotalLabel(totalAppointments);
           },
         },
@@ -43,7 +42,7 @@ const RoundedChart = () => {
               show: true,
               label: "Total",
               formatter: function () {
-                return totalLabel; // Dynamically set the label based on hover or total count
+                return totalLabel;
               },
             },
           },
@@ -66,7 +65,13 @@ const RoundedChart = () => {
 
       try {
         const response = await axios.get(apiUrl);
-        const appointments = response.data;
+        let appointments;
+
+        if (userType === 2) {
+          appointments = response.data.appointments;
+        } else {
+          appointments = response.data;
+        }
 
         // Process the gender data
         const genderCounts = { male: 0, female: 0, others: 0 };
@@ -79,8 +84,7 @@ const RoundedChart = () => {
 
         const total =
           genderCounts.male + genderCounts.female + genderCounts.others;
-        setTotalAppointments(total); // Set total appointments
-
+        setTotalAppointments(total);
         const malePercentage = ((genderCounts.male / total) * 100).toFixed(2);
         const femalePercentage = ((genderCounts.female / total) * 100).toFixed(
           2
@@ -89,7 +93,6 @@ const RoundedChart = () => {
           2
         );
 
-        // Update the chart data
         setChartOptions((prevOptions) => ({
           ...prevOptions,
           series: [malePercentage, femalePercentage, othersPercentage],

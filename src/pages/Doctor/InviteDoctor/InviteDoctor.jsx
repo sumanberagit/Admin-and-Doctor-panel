@@ -4,6 +4,7 @@ import axios from "axios";
 import "./InviteDoctor.css";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
+import DoctorsList from "./doctorListingforInvitePage";
 
 const InviteDoctor = () => {
   // State for form fields
@@ -13,29 +14,22 @@ const InviteDoctor = () => {
   const [contact, setContact] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Reset error and success messages
     setError(null);
     setSuccess(null);
-
-    setLoading(true); // Set loading to true when the request is made
+    setLoading(true);
 
     try {
-      // Make API request to send the invitation
-      const response = await axios.post(
-        "https://consultant-backend-jiwv.onrender.com/invite-doctor",
-        {
-          firstName,
-          lastName,
-          email,
-          contact,
-        }
-      );
+      const response = await axios.post("http://localhost:8080/invite-doctor", {
+        firstName,
+        lastName,
+        email,
+        contact,
+      });
 
       if (response.data) {
         setSuccess("Doctor invitation sent successfully!");
@@ -48,33 +42,25 @@ const InviteDoctor = () => {
       setError("Failed to send invitation. Please try again.");
     }
 
-    setLoading(false); // Set loading to false after the request completes
+    setLoading(false);
   };
 
   return (
     <BaseLayout>
-      <div className="min-h-screen bg-gray-50 p-4 mb-16">
-        {/* Header */}
-        {/* <div className="mx-5 flex justify-center">
-          <h3 className="py-2 font-bold text-gray-700 text-lg" id="header">
-            Invite New Doctor
-          </h3>
-        </div> */}
+      <div className="justify-between bg-gray-50 p-1 mb-16 flex h-auto">
+        <div className="relative flex justify-between p-5 w-[69%] h-[60%]">
+          {/* Background Animation */}
+          <div className="" />
 
-        {/* Main Content */}
-        <div className="flex justify-center p-14">
           {/* Form Container */}
-          <div className="bg-white shadow-md rounded-lg p-10 w-full max-w-3xl">
+          <div className="bg-white shadow-md rounded-lg p-10 w-full max-w-3xl z-10 background-animation">
             <form onSubmit={handleSubmit}>
-              <div className=" flex justify-center">
-                <h3
-                  className="py-2 font-bold text-gray-700 text-lg"
-                  id="header"
-                >
+              <div className="flex justify-center">
+                <h3 className="text-xl font-bold mb-6 text-gray-800">
                   Invite New Doctor
                 </h3>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 p-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-10">
                 <div>
                   <label className="block text-gray-600">First Name</label>
                   <input
@@ -133,7 +119,7 @@ const InviteDoctor = () => {
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-blue-500 hover:bg-blue-600"
                 } text-white py-2 px-4 rounded mt-4 flex justify-center items-center`}
-                disabled={loading} // Disable the button when loading
+                disabled={loading}
               >
                 {loading ? (
                   <svg
@@ -163,6 +149,7 @@ const InviteDoctor = () => {
             </form>
           </div>
         </div>
+        <DoctorsList />
       </div>
     </BaseLayout>
   );

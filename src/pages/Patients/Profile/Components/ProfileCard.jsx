@@ -1,6 +1,7 @@
 import React from "react";
 import profile from "../../../../assets/images/google.png";
 import bg from "../../../../assets/images/trioakBg.png";
+import PatientAvtar from "../../../../assets/images/alex-suprun-ZHvM3XIOHoE-unsplash.jpg";
 
 const ProfileCard = ({ patientData }) => {
   // Destructure necessary data from patientData
@@ -22,12 +23,17 @@ const ProfileCard = ({ patientData }) => {
           src={bg}
           alt="Cover"
         />
+        {/* <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white w-32 h-32 bg-gray-300 flex items-center justify-center text-3xl font-bold text-white">
+          {patientData.name
+            .split(" ")
+            .map((name) => name.charAt(0).toUpperCase())
+            .slice(0, 2)
+            .join("")}
+        </div> */}
         <img
-          className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white"
-          src={profile}
-          alt="Profile"
-          width={130}
-          height={130}
+          src={PatientAvtar}
+          alt="Doctor Avatar"
+          className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white w-32 h-32 bg-gray-300 flex items-center justify-center text-3xl font-bold text-white"
         />
       </div>
       <div className="text-center mt-20">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import "tailwindcss/tailwind.css";
 import BaseLayout from "../../layouts/BaseLayout";
-import axios from "axios"; // Import axios for API calls
+import axios from "axios";
 import { useSelector } from "react-redux";
 
 Modal.setAppElement("#root");
@@ -66,14 +66,11 @@ const AttendanceCalendar = () => {
   useEffect(() => {
     const fetchCheckupDates = async () => {
       try {
-        const response = await axios.get(
-          "https://consultant-backend-jiwv.onrender.com/doctor/dates",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get("http://localhost:8080/doctor/dates", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (
           response.data.success &&
@@ -163,13 +160,13 @@ const AttendanceCalendar = () => {
     for (let day = 1; day <= daysInMonth; day++) {
       const dateKey = `${year}-${(month + 1).toString().padStart(2, "0")}-${day
         .toString()
-        .padStart(2, "0")}`; // Format date as YYYY-MM-DD
+        .padStart(2, "0")}`;
 
       const hasTimeRanges = dateTimes[dateKey];
 
       const eventClass = hasTimeRanges
         ? "bg-green-100 border-l-4 border-green-500"
-        : "bg-red-100 border-l-4 border-red-500"; // Green for dates with times, Red for others
+        : "bg-red-100 border-l-4 border-red-500";
 
       // Display all time ranges if they exist
       const timeText = hasTimeRanges
@@ -254,7 +251,7 @@ const AttendanceCalendar = () => {
 
       try {
         const response = await axios.post(
-          "https://consultant-backend-jiwv.onrender.com/doctor/set-checkup-times",
+          "http://localhost:8080/doctor/set-checkup-times",
           payload,
           {
             headers: {
@@ -273,11 +270,11 @@ const AttendanceCalendar = () => {
               startTime: payload.timeRanges[0].startTime,
               endTime: payload.timeRanges[0].endTime,
             },
-          ], // Replace existing ranges
+          ],
         }));
 
-        setIsModalOpen(false); // Close modal after saving
-        // Reset times after saving
+        setIsModalOpen(false);
+
         setStartTime("09:00");
         setEndTime("17:00");
       } catch (error) {

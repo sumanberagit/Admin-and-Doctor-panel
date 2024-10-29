@@ -9,15 +9,20 @@ import { setDepartments, setBio } from "../../../redux/Reducer/AuthReducer";
 
 const DoctorsList = () => {
   const [doctors, setDoctors] = useState([]);
+  const [filteredDoctors, setFilteredDoctors] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true); // Loading state
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/public/doctor")
-      .then((response) => {
+    const fetchDoctors = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get("http://localhost:8080/public/doctor");
         const doctorsData = response.data.doctors;
         setDoctors(doctorsData);
+        setFilteredDoctors(doctorsData);
 
         const departmentsArray = doctorsData.map(
           (doctor) => doctor.Departments
@@ -27,19 +32,64 @@ const DoctorsList = () => {
         );
         dispatch(setDepartments(departmentsArray));
         dispatch(setBio(namesArray));
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("There was an error fetching the doctors!", error);
-      });
+      } finally {
+        setLoading(false); // End loading
+      }
+    };
+
+    fetchDoctors();
   }, [dispatch]);
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearchTerm(value);
+
+    const filtered = doctors.filter(
+      (doctor) =>
+        doctor.firstName.toLowerCase().includes(value) ||
+        doctor.lastName.toLowerCase().includes(value) ||
+        doctor.Departments.toLowerCase().includes(value)
+    );
+
+    setFilteredDoctors(filtered);
+  };
 
   const handleNavigation = () => {
     navigate("/doctors/invite-doctor");
   };
 
   const handleClick = (doctor) => {
-    navigate(`/doctors/profile`, { state: { doctor } });
+    navigate(`/doctors/profile`, {
+      state: { doctor, contact: doctor.contact, email: doctor.email },
+    });
   };
+
+  const loader = (
+    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50">
+      <svg
+        className="animate-spin h-32 w-32 text-blue-500" // Large spinner
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+        ></circle>
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v8H4z"
+        ></path>
+      </svg>
+    </div>
+  );
 
   return (
     <BaseLayout>
@@ -55,9 +105,22 @@ const DoctorsList = () => {
             Invite New Doctor
           </button>
         </div>
-        {doctors.length > 0 ? (
+
+        <div className="flex justify-start mb-4">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search by name or department..."
+            className="w-100 p-2 border border-gray-300 rounded-md"
+          />
+        </div>
+
+        {loading ? ( // Conditional rendering based on loading state
+          loader
+        ) : filteredDoctors.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {doctors.map((doctor) => (
+            {filteredDoctors.map((doctor) => (
               <div
                 key={doctor._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden"

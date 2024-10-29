@@ -54,7 +54,7 @@ const Dashboard = () => {
   return (
     <BaseLayout>
       <h3 className="mx-5 py-4 font-bold text-gray-700 text-lg">Dashboard</h3>
-      <div className="flex space-x-4 mx-5 justify-center row">
+      <div className="flex space-x-4 mx-5  row">
         <div className="rounded-md gap-5 w-[220px] h-[140px] bg-white border border-gray-300 shadow-md flex items-center justify-center">
           <div className="flex items-center space-x-4">
             <img
@@ -131,7 +131,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="mt-10">
+      <div className="flex mt-10">
         <Charts />
       </div>
       <div className="flex flex-row mt-10 mb-10">

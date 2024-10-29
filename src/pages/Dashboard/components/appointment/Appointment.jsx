@@ -18,13 +18,11 @@ const Appointment = () => {
       setLoading(true);
       try {
         if (userType === 1) {
-          // Fetch doctors data
           const response = await axios.get(
             "https://consultant-backend-jiwv.onrender.com/public/doctor"
           );
-          setDoctors(response.data.doctors); // Assuming the response contains a 'doctors' array
+          setDoctors(response.data.doctors);
         } else if (userType === 2) {
-          // Fetch appointments data
           const response = await axios.get(
             `https://consultant-backend-jiwv.onrender.com/doctor/${userId}/appointments`
           );
@@ -38,11 +36,11 @@ const Appointment = () => {
     };
 
     fetchData();
-  }, [userType]); // Dependency array includes userType to refetch data if userType changes
+  }, [userType]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toISOString().split("T")[0]; // Returns date in YYYY-MM-DD format
+    return date.toISOString().split("T")[0];
   };
 
   return (
@@ -73,10 +71,7 @@ const Appointment = () => {
                     className="flex items-center justify-between py-2 last:border-b-0"
                   >
                     <div className="flex items-center">
-                      <img
-                        src={Icon} // Assuming the doctor object has an 'image' field
-                        className="w-10 h-10 rounded-full mr-4"
-                      />
+                      <img src={Icon} className="w-10 h-10 rounded-full mr-4" />
                       <div>
                         <p className="font-medium">
                           {doctor.firstName} {doctor.lastName}
